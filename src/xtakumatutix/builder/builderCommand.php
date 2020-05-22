@@ -75,10 +75,10 @@ Class builderCommand extends Command
                     }
                     case "list":
                     $array = [];
-					foreach ($config->getAll() as $key => $value) {
-						array_push($array, $key);
-					}
-					$sender->sendMessage("ビルダー権限は付与されているプレイヤーは以下の通りになります。\n".implode(", ", $array));
+                    foreach ($config->getAll() as $key => $value) {
+                        array_push($array, $key);
+                    }
+                    $sender->sendMessage("ビルダー権限は付与されているプレイヤーは以下の通りになります。\n".implode(", ", $array));
                 }
             }else{
                 $sender->sendMessage("あなたはOPではありません");
