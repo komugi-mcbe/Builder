@@ -5,8 +5,6 @@ namespace xtakumatutix\builder;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
 use pocketmine\utils\Config;
-use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\event\Listener;
 use xtakumatutix\builder\builderCommand;
 
 Class Main extends PluginBase

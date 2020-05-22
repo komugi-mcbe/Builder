@@ -1,7 +1,5 @@
 <?php
 
-// アイコン:http://flat-icon-design.com/?p=400
-
 namespace xtakumatutix\builder;
 
 use pocketmine\plugin\PluginBase;
@@ -9,11 +7,6 @@ use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\plugin\Plugin;
-use pocketmine\scheduler\ClosureTask;
-use pocketmine\Server;
-use bbo51dog\pmdiscord\Sender;
-use bbo51dog\pmdiscord\element\Content;
 
 Class builderCommand extends Command 
 {
