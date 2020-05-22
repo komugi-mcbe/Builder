@@ -1,0 +1,10 @@
+---
+name: Builder
+main: xtakumatutix\builder\Main
+version: 1.0.0
+api: 3.0.0
+premissions:
+  builder:
+    description: "ビルダー権限です"
+    usage: /builder <action>
+...
