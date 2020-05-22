@@ -28,12 +28,13 @@ Class builderCommand extends Command
         $this->setUsage("/post <Action>");
     }
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args): bool
-	{
-		if ($sender instanceof Player)
-		{
+    public function execute(CommandSender $sender, string $commandLabel, array $args): bool
+    {
+        if ($sender instanceof Player)
+        {
             $name = $sender->getName();
-            if($this->Main->config->get($name) == null){
+            $config = $this->Main->config;
+            if(!$config->exists($name)) {
                 $sender->sendMessage("ビルダー権限がありません");
                 return true;
             }else{
@@ -42,11 +43,11 @@ Class builderCommand extends Command
                     switch ($args[1]){
                         case 1:
                         $sender->sendMessage("クリエ");
-                        return true;
+                        break;
 
                         case 0:
                         $sender->sendMessage("サバイバル");
-                        return true;
+                        break;
                     }
                 }
             }
@@ -54,16 +55,35 @@ Class builderCommand extends Command
                 switch ($args[0]){
                     case "set":
                     if(isset($args[1])){
-                        $sender->sendMessage($args[1]."さんをビルダー権限に設定しました");
-                        $this->Main->config->set($args[1]);
-                        $this->Main->config->save();
-                        return true;
+                        if(!$config->exists($args[1])){
+                            $sender->sendMessage($args[1]."さんをビルダー権限に設定しました");
+                            $config->set($args[1]);
+                            $config->save();
+                        }else{
+                            $sender->sendMessage($args[1]."さんは既にビルダー権限が付与されています");
+                        }
                     }
+                    case "remove":
+                    if(isset($args[1])) {
+                        if(!$config->exists($args[1])){
+                            $sender->sendMessage($args[1]."さんをビルダー権限に設定されていません");
+                        }else{
+                            $sender->sendMessage($args[1]."さんからビルダー権限を剥奪しました");
+                            $config->remove($args[1]);
+                            $config->save();
+                        }
+                    }
+                    case "list":
+                    $array = [];
+					foreach ($config->getAll() as $key => $value) {
+						array_push($array, $key);
+					}
+					$sender->sendMessage("ビルダー権限は付与されているプレイヤーは以下の通りになります。\n".implode(", ", $array));
                 }
             }else{
                 $sender->sendMessage("あなたはOPではありません");
-                return true;
             }
+            return true;
         }
     }
 }
